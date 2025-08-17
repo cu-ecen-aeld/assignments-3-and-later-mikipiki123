@@ -18,8 +18,8 @@ jobs:
 <<<<<<< HEAD
     full-test:
 <<<<<<< HEAD
-        container: cuaesd/aesd-autotest:24-assignment1
-        runs-on: ubuntu-latest
+        #container: cuaesd/aesd-autotest:24-assignment1
+        #runs-on: ubuntu-latest
 =======
         container: cuaesd/aesd-autotest:24-assignment2
         runs-on: self-hosted
