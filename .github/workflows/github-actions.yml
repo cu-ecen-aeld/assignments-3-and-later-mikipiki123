@@ -15,16 +15,10 @@ jobs:
             run : git submodule update --init --recursive
           - name: Run unit test
             run: ./unit-test.sh
-<<<<<<< HEAD
 
     full-test:
-        container: cuaesd/aesd-autotest:24-assignment3-part-1
+        container: cuaesd/aesd-autotest:24-assignment3-part-2
         runs-on: ubuntu-latest
-=======
-    full-test:
-        container: cuaesd/aesd-autotest:24-assignment3
-        runs-on: self-hosted
->>>>>>> assignments-base/assignment3-part-2
         steps:
           - uses: actions/checkout@v2
           - name: Checkout submodules
