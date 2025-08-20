@@ -19,9 +19,17 @@ struct thread_data{
      * Set to true if the thread completed with success, false
      * if an error occurred.
      */
-    bool thread_complete_success;
-};
 
+
+     pthread_mutex_t *mutex;
+     
+     int wait_to_obtain_ms;
+     int wait_to_release_ms;
+
+
+     bool thread_complete_success;
+
+};
 
 /**
 * Start a thread which sleeps @param wait_to_obtain_ms number of milliseconds, then obtains the
@@ -33,8 +41,8 @@ struct thread_data{
 * amount of available memory.
 * The thread started should return a pointer to the thread_data structure when it exits, which can be used
 * to free memory as well as to check thread_complete_success for successful exit.
-* If a thread was started succesfully @param thread should be filled with the pthread_create thread ID
-* coresponding to the thread which was started.
+* If a thread was started successfully @param thread should be filled with the pthread_create thread ID
+* corresponding to the thread which was started.
 * @return true if the thread could be started, false if a failure occurred.
 */
 bool start_thread_obtaining_mutex(pthread_t *thread, pthread_mutex_t *mutex,int wait_to_obtain_ms, int wait_to_release_ms);
