@@ -32,7 +32,8 @@ echo "Writing ${NUMFILES} files containing string ${WRITESTR} to ${WRITEDIR}"
 rm -rf "${WRITEDIR}"
 
 # create $WRITEDIR if not assignment1
-assignment=`cat ../conf/assignment.txt`
+#assignment=`cat ../conf/assignment.txt`
+assignment=`cat /etc/finder-app/conf/assignment.txt`
 
 if [ $assignment != 'assignment1' ]
 then
@@ -59,8 +60,8 @@ do
 done
 
 
-OUTPUTSTRING=$(./finder.sh "$WRITEDIR" "$WRITESTR")
-
+OUTPUTSTRING=$(/usr/bin/finder.sh "$WRITEDIR" "$WRITESTR")
+echo $OUTPUTSTRING >> /tmp/assignment4-result.txt
 
 # remove temporary directories
 rm -rf /tmp/aeld-data
@@ -68,7 +69,6 @@ rm -rf /tmp/aeld-data
 
 set +e
 
-echo ${OUTPUTSTRING} > /tmp/assignment4-result.txt
 
 echo ${OUTPUTSTRING} | grep "${MATCHSTR}"
 if [ $? -eq 0 ]; then
