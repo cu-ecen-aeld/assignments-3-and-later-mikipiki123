@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 if [[ -z "$1" || -z "$2" ]]; then
 	echo "one of the arguments aren't specified."
