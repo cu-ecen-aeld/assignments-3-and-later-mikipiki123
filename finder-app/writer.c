@@ -15,18 +15,28 @@ int main(int argc, char *argv[]) {
     }
 
 
-    FILE *f = fopen(writefile, "w");
-    if (f == NULL) {
-        syslog(LOG_ERR, "cannot open file %s", writefile);
+    // Open the file for writing
+    int fd = open(writefile, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+    if (fd == -1) {
+        syslog(LOG_ERR, "Failed to open file %s: %s", writefile, strerror(errno));
+        closelog();
         return 1;
-    } else {
-        syslog(LOG_DEBUG, "Writing %s to %s", writestr, writefile);
-        fprintf(f, "%s", writestr);
     }
 
+    // Write string to file
+    ssize_t bytes_written = write(fd, writestr, strlen(writestr));
+    if (bytes_written == -1) {
+        syslog(LOG_ERR, "Failed to write to file %s: %s", writefile, strerror(errno));
+        close(fd);
+        closelog();
+        return 1;
+    }
+
+    // Log the successful write
+    syslog(LOG_DEBUG, "Writing %s to %s", writestr, writefile);
+
+    // Clean up
+    close(fd);
     closelog();
-
-    fclose(f);
     return 0;
-
 }
